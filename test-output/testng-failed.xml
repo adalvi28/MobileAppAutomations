@@ -6,18 +6,17 @@
     <parameter name="UDID" value="emulator-5554"/>
     <parameter name="deviceName" value="pixel_4_xl"/>
     <classes>
-      <class name="com.qa.tests.LoginTests">
+      <class name="com.qa.tests.AppIntro">
         <methods>
           <include name="beforeMethod"/>
           <include name="afterTest"/>
-          <include name="invalidUserName"/>
-          <include name="beforeClass"/>
+          <include name="appIntroScreens"/>
           <include name="beforeTest"/>
-          <include name="afterMethod"/>
+          <include name="beforeClass"/>
           <include name="afterClass"/>
-          <include name="LoginTest"/>
+          <include name="afterMethod"/>
         </methods>
-      </class> <!-- com.qa.tests.LoginTests -->
+      </class> <!-- com.qa.tests.AppIntro -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
