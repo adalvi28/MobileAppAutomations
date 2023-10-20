@@ -1,6 +1,10 @@
 package com.qa.tests;
 
 
+import com.qa.pages.HomePage;
+import com.qa.pages.LoginPage;
+import com.qa.pages.NavigationTab;
+import com.qa.pages.NotLoggedInMenu;
 import org.testng.annotations.Test;
 
 import com.qa.BaseTest;
@@ -13,98 +17,52 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class LoginTests extends BaseTest{
-  
-	//LoginPage loginPage;
-	
-	//HomePage homePage;
-	
-	
-	
-  @BeforeMethod
-  public void beforeMethod() {
-  }
+public class LoginTests extends BaseTest {
 
-  @AfterMethod
-  public void afterMethod() {
-	  
-	  //loginPage = new LoginPage();
-	  //homePage = new HomePage();
-  }
+    LoginPage loginPage;
+    HomePage homePage;
+    NavigationTab navigationTab;
+    NotLoggedInMenu notLoggedInMenu;
 
-  @BeforeClass
-  public void beforeClass() {
-  }
-
-  @AfterClass
-  public void afterClass() {
-	  
-   }
-  
-  
-  
-  
-    @Test
-    public void LoginTest() throws InterruptedException { 
-    	
-      WebElement moreTab = driver.findElement(new By.ByXPath("//android.widget.FrameLayout[@content-desc=\"More\"]"));
-	  waitForVisibility(moreTab);
-	  moreTab.click();
-	  Thread.sleep(1000);
-	  //---------------------------------------------------
-	  
-	  
-	
-	  WebElement logInBtn = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/loginCTA"));
-	  waitForVisibility(logInBtn);
-	  logInBtn.click();
-	  Thread.sleep(1000);
-	  
-	  
-
-	  WebElement emailAddress = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/email_address_ed"));
-	  waitForVisibility(emailAddress);
-	  emailAddress.sendKeys("reg@f1.com");
-	  Thread.sleep(1000);
-	  
-	  
-	 
-	  WebElement password = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/password_ed"));
-	  waitForVisibility(password);
-	  password.sendKeys("test1234");
-	  Thread.sleep(1000);
-	  
-	  
-	  WebElement logIn = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/logInBtn"));
-	  waitForVisibility(logIn);
-	  logIn.click();
-	  
-	  Thread.sleep(6000);
-	  
-	 
-//	  if (driver.findElement(new By.ById("android:id/button2")).isEnabled())
-//       {
-//      	 driver.findElement(new By.ById("android:id/button2")).click();
-//	  }
-//	  else {
-//		  System.out.println("Rate course Modal Not available");
-//	  }
-//	  
-//	  Thread.sleep(3000);
-	  
-	  WebElement ExploreTab = driver.findElement(new By.ByXPath("//android.widget.LinearLayout[@content-desc=\"EXPLORE\"]"));
-	  waitForVisibility(ExploreTab);
-    	
-	  
-	  Assert.assertEquals(ExploreTab.getAttribute("content-desc"), "EXPLORE");
+    @BeforeMethod
+    public void beforeMethod() {
+        loginPage = new LoginPage();
+        homePage = new HomePage();
+        navigationTab = new NavigationTab();
+        notLoggedInMenu = new NotLoggedInMenu();
     }
-    
+
+    @AfterMethod
+    public void afterMethod() {
+
+    }
+
+    @BeforeClass
+    public void beforeClass() {
+    }
+
+    @AfterClass
+    public void afterClass() {
+
+    }
+
+    @Test
+    public void LoginTest() throws InterruptedException {
+        navigationTab.clickMoreTab();
+        loginPage.clickOnLoginCTAButton();
+        loginPage.enterUserName("reg@f1.com");
+        loginPage.enterPassword("test1234");
+        notLoggedInMenu.pressLogInBtn();
+        Thread.sleep(1000);
+        homePage.getExploreText();
+        Assert.assertEquals(homePage.getExploreText().toLowerCase(), "explore", "Explore Tab not visible on Home Page");
+    }
+
     @Test
     public void invalidUserName() {
-    	 WebElement ExploreTab = driver.findElement(new By.ByXPath("//android.widget.LinearLayout[@content-desc=\"EXPLORE\"]"));
-   	  waitForVisibility(ExploreTab);
-   }
-    
+        homePage.getExploreText();
+    }
+
 //    @Test
 //    public void invalidPassword() {
 //    	 WebElement ExploreTab = driver.findElement(new By.ByXPath("//android.widget.LinearLayout[@content-desc=\"EXPLORE\"]"));
@@ -113,9 +71,6 @@ public class LoginTests extends BaseTest{
 //   	  
 //   }
 }
-
-
-
 //  public void invalidUserName() {
 //	  loginPage.enterUserName("aa1.com");
 //	  loginPage.enterPassword("test1234");

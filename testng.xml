@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite parallel="false" name="Suite">
-<listneres>
-	<listeners class-name="com.qa.listeners.TestListener">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<listeners>
+		<listener class-name="com.qa.listeners.TestListener"/>
 	</listeners>
-</listneres>
-  <test name="Test">
-	  <parameter name="platformName" value="Android"/>
-	  <parameter name="UDID" value="emulator-5554"/>
-	  <parameter name="deviceName" value="pixel_4_xl"/>
-    <classes>
-      <class name="com.qa.tests.AppIntro"/>
-      <class name="com.qa.tests.LoginTests"/>
-    </classes>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+	<test name = "AppIntro and Login">
+		<parameter name="platformName" value="Android"/>
+		<parameter name="UDID" value="emulator-5554"/>
+		<parameter name="deviceName" value="pixel_4_xl"/>
+		<classes>
+			<class name="com.qa.tests.AppIntro"/>
+			<class name="com.qa.tests.LoginTests"/>
+		</classes>
+	</test>
+</suite>

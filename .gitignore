@@ -1,1 +1,9 @@
 /target/
+/src/test/resources/app/GolfNow.iOS.app/
+/src/test/resources/app/GolfNow.iOS_QA/
+/src/test/resources/app/com.golfnow.android.teetimes.qa (2).apk
+/src/test/resources/app/GolfNow.iOS.ipa
+/src/test/resources/app/GolfNow.iOS_QA.ipa
+/src/test/resources/app/GolfNow.iOS_QA.ipa.zip
+/src/test/resources/app/GolfNow.iOS_QA 2.app
+/test-output/

@@ -1,0 +1,14 @@
+userName: supawufxcwqkhfqm_Eocf7z
+accessKey: zaor5W7N6cqi2DTtzkSj
+framework: testng
+app: /Users/keyurparmar/IdeaProjects/MobileAppAutomation/src/test/resources/app/com.golfnow.android.teetimes.qa (2).apk
+platforms:
+  - platformName: android
+    deviceName: Samsung Galaxy S22 Ultra
+    platformVersion: 12.0
+browserstackLocal: true
+buildName: android-bs-build
+projectName: Android BS
+autoGrantPermissions: true
+autoAcceptAlerts: true
+interactiveDebugging: true
