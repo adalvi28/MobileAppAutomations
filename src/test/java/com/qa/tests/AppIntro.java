@@ -1,5 +1,6 @@
 package com.qa.tests;
 
+import com.qa.pages.HomePage;
 import org.testng.annotations.Test;
 
 
@@ -19,89 +20,57 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class AppIntro extends BaseTest{
-	
-	
-	AppEntryPage appEntryPage; 
+public class AppIntro extends BaseTest {
+    AppEntryPage appEntryPage;
+    HomePage homePage;
 
-	  @BeforeClass
-	  public void beforeClass() {
-	  }
+    @BeforeClass
+    public void beforeClass() {
+    }
 
-	  @AfterClass
-	  public void afterClass() {
-	  }
-	  
-	  @BeforeMethod
-	  public void beforeMethod(Method m) {
-		  
-		 appEntryPage = new AppEntryPage();
-		 System.out.println(m.getName());
-		 
-	  }
+    @AfterClass
+    public void afterClass() {
+    }
 
-	  @AfterMethod
-	  public void afterMethod() {
-	  }
-  
-//
-// 
-//  
-  @Test
-  public void appIntroScreens() throws InterruptedException {
-	  	  
-	  
-	  	 
-  	  Thread.sleep(2000);
-	  WebElement allowLocation = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/primary_action"));
-      waitForVisibility(allowLocation);
-  	  allowLocation.click();
-	  
-  	 
-  	  Thread.sleep(2000);
-  	  WebElement whileUsingApp = driver.findElement(new By.ById("com.android.permissioncontroller:id/permission_allow_foreground_only_button"));  
-  	  waitForVisibility(whileUsingApp);
-  	  whileUsingApp.click();
-	  
-  	 Thread.sleep(1000);
-	  WebElement allowNotifications = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/primary_action"));  //com.golfnow.android.teetimes.qa:id/primary_action
-	  waitForVisibility(allowNotifications);
-	  allowNotifications.click();
-	  
-	  Thread.sleep(1000);
-	  WebElement nextAction = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/next_action"));  
-	  waitForVisibility(nextAction);
-	  nextAction.click();
-	  
-	  Thread.sleep(1000);
-	  WebElement skipAction = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/skip_action"));  
-	  Thread.sleep(1000);
-	  nextAction.click();
-	  Thread.sleep(1000);
-	  nextAction.click();
-	  Thread.sleep(1000);
-	    
-		//	 do {
-		//		 nextAction.click();
-		//	 } while (nextAction.isDisplayed());
-			
-	  WebElement searchCourseNearMe = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/primary_action"));
-	  WebElement doneButton = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/next_action"));  
-	 
-	  System.out.println(doneButton.getAttribute("text"));
-	  Assert.assertEquals(doneButton.getAttribute("text"), "DONE");
-	  doneButton.click();
-	  
-	  Thread.sleep(1000);
-	  
-	  WebElement welcomeLabelHomepage = driver.findElement(new By.ById("com.golfnow.android.teetimes.qa:id/welcomeLabel"));
-	  waitForVisibility(welcomeLabelHomepage);
-	  Assert.assertEquals(welcomeLabelHomepage.getAttribute("text"), "Welcome");
-	  System.out.println(welcomeLabelHomepage.getAttribute("text"));
-	  
-	  Thread.sleep(3000);
-	  
-	 // ---------------------------------------------
+    @BeforeMethod
+    public void beforeMethod(Method m) {
+        appEntryPage = new AppEntryPage();
+        homePage = new HomePage();
+        log.info(m.getName());
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+    }
+
+    @Test
+    public void appIntroScreens() throws InterruptedException {
+        appEntryPage.allowLocation();
+        if(properties.getProperty("platformName").equalsIgnoreCase("ios")){
+            appEntryPage.permissionModal();
+        }
+        appEntryPage.allowNotifications();
+        if(properties.getProperty("platformName").equalsIgnoreCase("ios")){
+            appEntryPage.combineMyData();
+        }
+        appEntryPage.nextButton();
+        Thread.sleep(1000);
+        appEntryPage.nextButton();
+        Thread.sleep(1000);
+        appEntryPage.nextButton();
+        Thread.sleep(1000);
+        String doneButton = appEntryPage.verifyButtonText();
+        log.info(doneButton);
+        Assert.assertEquals(doneButton, "DONE", "Done button text not matched");
+        appEntryPage.skipButton();
+
+        Thread.sleep(1000);
+        log.info(homePage.getTitle());
+        Assert.assertEquals(homePage.getTitle(), "Welcome", "Home Page Title not matched");
+
+//		  Thread.sleep(3000);
+
+        // ---------------------------------------------
 //	  WebElement searchTab = driver.findElement(new By.ByXPath("//android.widget.FrameLayout[@content-desc=\"Search\"]"));
 //	  waitForVisibility(searchTab);
 //	  searchTab.click();
@@ -156,7 +125,7 @@ public class AppIntro extends BaseTest{
 ////        	 driver.findElement(new By.ById("android:id/button2")).click();
 ////	  }
 ////	  else {
-////		  System.out.println("Rate course Modal Not available");
+////		  log.info("Rate course Modal Not available");
 ////	  }
 ////	  
 ////	  Thread.sleep(3000);
@@ -166,8 +135,5 @@ public class AppIntro extends BaseTest{
 //      	
 //	  
 //	  Assert.assertEquals(ExploreTab.getAttribute("content-desc"), "EXPLORE");
-
-	
-  }
+    }
 }
-;
